@@ -1,7 +1,5 @@
 import React from 'react'
 
-import Header from '../components/header';
-
 export default class extends React.Component {
   static getInitialProps ({ query: { id } }) {
     return { id }
@@ -10,7 +8,6 @@ export default class extends React.Component {
   render () {
     return (
       <div>
-        <Header/>
         <i className="fas fa-2x fa-file-alt"></i>
         <h1>My {this.props.id} page</h1>
         <p>
