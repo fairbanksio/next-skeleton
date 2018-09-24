@@ -1,11 +1,8 @@
 import Link from 'next/link'
-
-import Header from '../components/header';
 import Buttons from '../components/buttons';
 
 export default () => (
   <div>
-    <Header/>
     <i className="fab fa-2x fa-react"></i>
     <h2>Server-Side Rendered Routes</h2>
     <ul>
