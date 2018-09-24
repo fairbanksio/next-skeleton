@@ -1,0 +1,21 @@
+{
+  "name": "next-skeleton",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.1.1",
+    "@material-ui/icons": "^3.0.1",
+    "express": "^4.14.0",
+    "lru-cache": "^4.0.2",
+    "mongoose": "^5.2.17",
+    "next": "^7.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "winston": "^3.1.0"
+  },
+  "license": "ISC"
+}
