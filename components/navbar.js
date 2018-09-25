@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
@@ -23,6 +24,9 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
   menuButton: {
     marginLeft: -12,
@@ -140,7 +144,7 @@ class NavBar extends React.Component {
               <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
               <MenuItem onClick={this.handleSignOut}>Sign Out</MenuItem>
             </div>
-          : <MenuItem onClick={this.handleSignIn}>Sign In</MenuItem>
+          : null
         }
       </Menu>
     );
@@ -171,7 +175,10 @@ class NavBar extends React.Component {
         </MenuItem>
         <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
-            <AccountCircle />
+            {this.state.userAuthd == true
+              ? <AccountCircle />
+              : <Button onClick={this.handleSignIn} style={{ color: '#FFF', borderColor: '#FFF' }} variant="outlined" color="primary" size="small" className={classes.button}>Sign In</Button>
+            }
           </IconButton>
           <p>Profile</p>
         </MenuItem>
@@ -207,14 +214,17 @@ class NavBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : null}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+              {this.state.userAuthd == true
+                ? <IconButton
+                    aria-owns={isMenuOpen ? 'material-appbar' : null}
+                    aria-haspopup="true"
+                    onClick={this.handleProfileMenuOpen}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                : <Button onClick={this.handleSignIn} style={{ color: '#FFF', borderColor: '#FFF' }} variant="outlined" color="primary" size="small" className={classes.button}>Sign In</Button>
+              }
             </div>
             <div className={classes.sectionMobile}>
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
