@@ -69,12 +69,11 @@ function Landing(props) {
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
             <Typography variant="display3" align="center" color="textPrimary" gutterBottom>
+              <i style={{ paddingRight: '10px' }} className="fab fa-react"/>
               Next-Skeleton
             </Typography>
             <Typography variant="title" align="center" color="textSecondary" paragraph>
-              Something short and leading about the collection below—its contents, the creator, etc.
-              Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-              entirely.
+              A simple framework to help get you stared with your Next.js app.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
@@ -96,7 +95,6 @@ function Landing(props) {
           {/* End hero unit */}
           <Grid container spacing={40}>
             <div>
-              <i className="fab fa-2x fa-react"></i>
               <br/>
               <h2>Server-Side Rendered Routes:</h2>
               <ul>
