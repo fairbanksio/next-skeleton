@@ -39,7 +39,8 @@ const styles = theme => ({
     },
   },
   search: {
-    position: 'relative',
+    position: 'absolute',
+    right: '95px',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -54,7 +55,7 @@ const styles = theme => ({
     },
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
+    width: theme.spacing.unit * 5,
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -70,11 +71,11 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+    paddingLeft: theme.spacing.unit * 5,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: 200,
+      width: 180,
     },
   },
   sectionDesktop: {
@@ -197,7 +198,10 @@ class NavBar extends React.Component {
             }
 
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
-              <a style={{ textDecoration: 'none', color: 'white' }} href='/'>Next-Skeleton</a>
+              <a style={{ textDecoration: 'none', color: 'white' }} href='/'>
+                <i style={{ paddingRight: '10px' }} className="fab fa-react"/>
+                Next-Skeleton
+              </a>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
