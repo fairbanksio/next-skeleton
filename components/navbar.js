@@ -91,6 +91,7 @@ class NavBar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    userAuthd: false
   };
 
   handleProfileMenuOpen = event => {
@@ -110,8 +111,18 @@ class NavBar extends React.Component {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+  handleSignIn = () => {
+    this.setState({ userAuthd: true, anchorEl: null });
+    this.handleMobileMenuClose();
+  };
+
+  handleSignOut = () => {
+    this.setState({ userAuthd: false, anchorEl: null });
+    this.handleMobileMenuClose();
+  };
+
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl, mobileMoreAnchorEl, userAuthd } = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -124,8 +135,13 @@ class NavBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleClose}>My account</MenuItem>
+        {this.state.userAuthd == true
+          ? <div>
+              <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+              <MenuItem onClick={this.handleSignOut}>Sign Out</MenuItem>
+            </div>
+          : <MenuItem onClick={this.handleSignIn}>Sign In</MenuItem>
+        }
       </Menu>
     );
 
@@ -166,11 +182,15 @@ class NavBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon />
-            </IconButton>
+            {this.state.userAuthd == true
+              ? <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
+                  <MenuIcon />
+                </IconButton>
+              : null
+            }
+
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
-              Material-UI
+              Next-Skeleton
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -187,16 +207,6 @@ class NavBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge className={classes.margin} badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton color="inherit">
-                <Badge className={classes.margin} badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
               <IconButton
                 aria-owns={isMenuOpen ? 'material-appbar' : null}
                 aria-haspopup="true"
