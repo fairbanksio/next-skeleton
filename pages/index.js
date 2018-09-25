@@ -13,6 +13,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -97,28 +104,52 @@ function Landing(props) {
           <Grid container spacing={40}>
             <Grid item sm={6} md={4} lg={4}>
               <h3>Server-Side Rendered Pages</h3>
-              <ul>
-                <li><Link href='/page?id=first' as='/page/first'><a>My first page</a></Link></li>
-                <li><Link href='/page?id=second' as='/page/second'><a>My second page</a></Link></li>
-                <li><Link href='/page?id=third' as='/page/third'><a>My third page</a></Link></li>
-              </ul>
+              <List component="nav" component="a" href="/page/first">
+                <ListItem button>
+                  <ListItemText primary="Sample Page 1" />
+                </ListItem>
+                <ListItem button component="a" href="/page/second">
+                  <ListItemText primary="Sample Page 2" />
+                </ListItem>
+                <ListItem button component="a" href="/page/third">
+                  <ListItemText primary="Sample Page 3" />
+                </ListItem>
+              </List>
             </Grid>
             <Grid item sm={6} md={4} lg={4}>
-              <h3>Next-Skeleton Out of the Box</h3>
-              <ul>
-                <li><a href='https://material-ui.com/' target='_blank' rel='noopener noreferrer'>Material UI</a></li>
-                <li><a href='https://fontawesome.com/icons' target='_blank' rel='noopener noreferrer'>FontAwesome 5</a></li>
-                <li>Mongoose</li>
-                <li>Winston</li>
-              </ul>
+              <h3>Included Features</h3>
+              <List component="nav">
+                <ListItem button component="a" href="https://material-ui.com/" target='_blank' rel='noopener noreferrer'>
+                  <i class="fab fa-2x fa-uikit"></i>
+                  <ListItemText primary="Material UI" />
+                </ListItem>
+                <ListItem button component="a" href="https://fontawesome.com/icons" target='_blank' rel='noopener noreferrer'>
+                  <i class="fab fa-2x fa-font-awesome-alt"></i>
+                  <ListItemText primary="FontAwesome 5" />
+                </ListItem>
+                <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
+                  <i class="fas fa-2x fa-stream"></i>
+                  <ListItemText primary="MongoDB Modeling via Mongoose" />
+                </ListItem>
+                <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
+                  <i class="far fa-2x fa-file-code"></i>
+                  <ListItemText primary="Winston Logging" />
+                </ListItem>
+              </List>
             </Grid>
             <Grid item sm={6} md={4} lg={4}>
               <h3>Links and Documentation</h3>
-              <ul>
-                <li><a href='https://nextjs.org/docs#setup' target='_blank' rel='noopener noreferrer'>Next.js Setup</a></li>
-                <li><a href='https://nextjs.org/docs#custom-app' target='_blank' rel='noopener noreferrer'>Using a Custom _App</a></li>
-                <li><a href='https://nextjs.org/docs#custom-document' target='_blank' rel='noopener noreferrer'>Using a Custom _Document</a></li>
-              </ul>
+              <List component="nav">
+                <ListItem button component="a" href="https://nextjs.org/docs#setup" target='_blank' rel='noopener noreferrer'>
+                  <ListItemText primary="Next.js Setup" />
+                </ListItem>
+                <ListItem button component="a" href="https://nextjs.org/docs#custom-app" target='_blank' rel='noopener noreferrer'>
+                  <ListItemText primary="Using a Custom _App" />
+                </ListItem>
+                <ListItem button component="a" href="https://nextjs.org/docs#custom-document" target='_blank' rel='noopener noreferrer'>
+                  <ListItemText primary="Using a Custom _Document" />
+                </ListItem>
+              </List>
             </Grid>
           </Grid>
         </div>
