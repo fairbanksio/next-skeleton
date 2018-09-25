@@ -67,6 +67,7 @@ nextApp
       // Note: To make capturing a slug easier when rendering both client
       // and server side, name it ':id'
       return renderAndCache(req, res, '/', req.params)
+    })
 
     expressApp.get('/login', (req, res) => {
       // Note: To make capturing a slug easier when rendering both client
