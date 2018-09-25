@@ -8,10 +8,10 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-// This is where we cache our rendered HTML pages
+// Cache our rendered HTML pages
 const ssrCache = new LRUCache({
   max: 100,
-  maxAge: 1000 * 60 * 60 // 1hour
+  maxAge: 1000 * 60 * 60 // 1 hour
 })
 
 app.prepare()
@@ -21,6 +21,10 @@ app.prepare()
     // Use the `renderAndCache` utility defined below to serve pages
     server.get('/', (req, res) => {
       renderAndCache(req, res, '/')
+    })
+
+    server.get('/login', (req, res) => {
+      renderAndCache(req, res, '/login')
     })
 
     server.get('/page/:id', (req, res) => {
