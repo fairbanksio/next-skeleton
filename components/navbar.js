@@ -190,7 +190,7 @@ class NavBar extends React.Component {
             }
 
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
-              Next-Skeleton
+              <a style={{ textDecoration: 'none', color: 'white' }} href='/'>Next-Skeleton</a>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
