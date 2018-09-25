@@ -170,7 +170,7 @@ class NavBar extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
-              Material-UI
+              Next-Skeleton
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
