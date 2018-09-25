@@ -23,8 +23,8 @@ app.prepare()
       renderAndCache(req, res, '/')
     })
 
-    server.get('/login', (req, res) => {
-      renderAndCache(req, res, '/login')
+    server.get('/signin', (req, res) => {
+      renderAndCache(req, res, '/signin')
     })
 
     server.get('/page/:id', (req, res) => {
