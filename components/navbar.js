@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
@@ -24,6 +25,9 @@ const styles = theme => ({
   grow: {
     flexGrow: 1,
   },
+  button: {
+    margin: theme.spacing.unit,
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -35,7 +39,8 @@ const styles = theme => ({
     },
   },
   search: {
-    position: 'relative',
+    position: 'absolute',
+    right: '95px',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -50,7 +55,7 @@ const styles = theme => ({
     },
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
+    width: theme.spacing.unit * 5,
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -66,11 +71,11 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+    paddingLeft: theme.spacing.unit * 5,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: 200,
+      width: 180,
     },
   },
   sectionDesktop: {
@@ -140,7 +145,7 @@ class NavBar extends React.Component {
               <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
               <MenuItem onClick={this.handleSignOut}>Sign Out</MenuItem>
             </div>
-          : <MenuItem onClick={this.handleSignIn}>Sign In</MenuItem>
+          : null
         }
       </Menu>
     );
@@ -171,7 +176,10 @@ class NavBar extends React.Component {
         </MenuItem>
         <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
-            <AccountCircle />
+            {this.state.userAuthd == true
+              ? <AccountCircle />
+              : <Button onClick={this.handleSignIn} style={{ color: '#FFF', borderColor: '#FFF' }} variant="outlined" color="primary" size="small" className={classes.button}>Sign In</Button>
+            }
           </IconButton>
           <p>Profile</p>
         </MenuItem>
@@ -190,7 +198,10 @@ class NavBar extends React.Component {
             }
 
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
-              <a style={{ textDecoration: 'none', color: 'white' }} href='/'>Next-Skeleton</a>
+              <a style={{ textDecoration: 'none', color: 'white' }} href='/'>
+                <i style={{ paddingRight: '10px' }} className="fab fa-react"/>
+                Next-Skeleton
+              </a>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -207,14 +218,17 @@ class NavBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : null}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+              {this.state.userAuthd == true
+                ? <IconButton
+                    aria-owns={isMenuOpen ? 'material-appbar' : null}
+                    aria-haspopup="true"
+                    onClick={this.handleProfileMenuOpen}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                : <Button onClick={this.handleSignIn} style={{ color: '#FFF', borderColor: '#FFF' }} variant="outlined" color="primary" size="small" className={classes.button}>Sign In</Button>
+              }
             </div>
             <div className={classes.sectionMobile}>
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
