@@ -3,10 +3,24 @@ const next = require('next')
 const LRUCache = require('lru-cache')
 var logger = require('./configs/logger')
 
-const port = parseInt(process.env.PORT, 10) || 3000
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const nextAuth = require('next-auth')
+const nextAuthConfig = require('./next-auth.config')
+
+const routes = {
+  admin:  require('./routes/admin'),
+  account:  require('./routes/account')
+}
+
+// Default when run with `npm start` is 'production' and default port is '80'
+// `npm run dev` defaults mode to 'development' & port to '3000'
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+process.env.PORT = process.env.PORT || 3000
+
+// Initialize Next.js
+const nextApp = next({
+  dir: '.',
+  dev: (process.env.NODE_ENV === 'development')
+})
 
 // Cache our rendered HTML pages
 const ssrCache = new LRUCache({
@@ -14,33 +28,71 @@ const ssrCache = new LRUCache({
   maxAge: 1000 * 60 * 60 // 1 hour
 })
 
-app.prepare()
+// Load environment variables from .env file if present
+require('dotenv').load()
+
+// Add next-auth to next app
+nextApp
+  .prepare()
   .then(() => {
-    const server = express()
+    // Load configuration and return config object
+    return nextAuthConfig()
+  })
+  .then(nextAuthOptions => {
+    // Pass Next.js App instance and NextAuth options to NextAuth
+    // Note We do not pass a port in nextAuthOptions, because we want to add some
+    // additional routes before Express starts (if you do pass a port, NextAuth
+    // tells NextApp to handle default routing and starts Express automatically).
+    return nextAuth(nextApp, nextAuthOptions)
+  })
+  .then(nextAuthOptions => {
+    // Get Express and instance of Express from NextAuth
+    const expressApp = nextAuthOptions.expressApp
 
-    // Use the `renderAndCache` utility defined below to serve pages
-    server.get('/', (req, res) => {
-      renderAndCache(req, res, '/')
+    // Add admin routes
+    routes.admin(expressApp)
+
+    // Add account management route - reuses functions defined for NextAuth
+    routes.account(expressApp, nextAuthOptions.functions)
+
+    // A simple example of custom routing
+    // Send requests for '/custom-route/{anything}' to 'pages/examples/routing.js'
+    expressApp.get('/page/:id', (req, res) => {
+      // Note: To make capturing a slug easier when rendering both client
+      // and server side, name it ':id'
+      return renderAndCache(req, res, '/page', req.params)
     })
 
-    server.get('/login', (req, res) => {
-      renderAndCache(req, res, '/login')
+    expressApp.get('/', (req, res) => {
+      // Note: To make capturing a slug easier when rendering both client
+      // and server side, name it ':id'
+      return renderAndCache(req, res, '/', req.params)
     })
 
-    server.get('/page/:id', (req, res) => {
-      const queryParams = { id: req.params.id }
-      renderAndCache(req, res, '/page', queryParams)
+    expressApp.get('/login', (req, res) => {
+      // Note: To make capturing a slug easier when rendering both client
+      // and server side, name it ':id'
+      return renderAndCache(req, res, '/login', req.params)
     })
 
-    server.get('*', (req, res) => {
-      return handle(req, res)
+    // Default catch-all handler to allow Next.js to handle all other routes
+    expressApp.all('*', (req, res) => {
+      let nextRequestHandler = nextApp.getRequestHandler()
+      return nextRequestHandler(req, res)
     })
 
-    server.listen(port, (err) => {
-      if (err) throw err
-      console.log(`> Ready on http://localhost:${port}`)
+    expressApp.listen(process.env.PORT, err => {
+      if (err) {
+        throw err
+      }
+      console.log('> Ready on http://localhost:' + process.env.PORT + ' [' + process.env.NODE_ENV + ']')
     })
   })
+  .catch(err => {
+    console.log('An error occurred, unable to start the server')
+    console.log(err)
+  })
+
 
 /*
  * NB: make sure to modify this to take into account anything that should trigger
@@ -63,7 +115,7 @@ async function renderAndCache (req, res, pagePath, queryParams) {
 
   try {
     // If not let's render the page into HTML
-    const html = await app.renderToHTML(req, res, pagePath, queryParams)
+    const html = await nextApp.renderToHTML(req, res, pagePath, queryParams)
 
     // Something is wrong with the request, let's skip the cache
     if (res.statusCode !== 200) {
@@ -78,7 +130,7 @@ async function renderAndCache (req, res, pagePath, queryParams) {
     res.setHeader('x-cache', 'MISS')
     res.send(html)
   } catch (err) {
-    app.renderError(err, req, res, pagePath, queryParams)
+    nextApp.renderError(err, req, res, pagePath, queryParams)
     logger.error("Error Rendering '" + pagePath + "': " + err);
   }
 }
