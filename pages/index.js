@@ -69,7 +69,7 @@ function Landing(props) {
               Next-Skeleton
             </Typography>
             <Typography variant="title" align="center" color="textSecondary" paragraph>
-              A simple framework to help get you stared with your Server-side Next.js app.
+              A simple framework to help get you started with your Server-side Next.js app.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
