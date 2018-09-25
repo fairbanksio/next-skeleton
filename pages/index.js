@@ -26,7 +26,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   heroContent: {
-    maxWidth: 600,
+    maxWidth: 750,
     margin: '0 auto',
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
   },
@@ -43,11 +43,8 @@ const styles = theme => ({
       marginRight: 'auto',
     },
   },
-  cardGrid: {
-    padding: `${theme.spacing.unit * 8}px 0`,
-  },
-  cardContent: {
-    flexGrow: 1,
+  contentGrid: {
+    padding: `${theme.spacing.unit * 4}px 0`,
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -60,7 +57,6 @@ const styles = theme => ({
 
 function Landing(props) {
   const { classes } = props;
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -73,36 +69,57 @@ function Landing(props) {
               Next-Skeleton
             </Typography>
             <Typography variant="title" align="center" color="textSecondary" paragraph>
-              A simple framework to help get you stared with your Next.js app.
+              A simple framework to help get you stared with your Server-side Next.js app.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
-                    Get Started
-                  </Button>
+                  <a style={{ textDecoration: 'none' }} href='https://github.com/Fairbanks-io/next-skeleton' target='_blank' rel='noopener noreferrer'>
+                    <Button variant="contained" color="primary">
+                      <i style={{ paddingRight: '10px' }} className="fab fa-github"/>
+                      View on GitHub
+                    </Button>
+                  </a>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary">
-                    More Info
-                  </Button>
+                  <a style={{ textDecoration: 'none' }} href='https://nextjs.org/learn/' target='_blank' rel='noopener noreferrer'>
+                    <Button variant="outlined" color="primary">
+                      Learning Next.js
+                    </Button>
+                  </a>
                 </Grid>
               </Grid>
             </div>
           </div>
         </div>
-        <div className={classNames(classes.layout, classes.cardGrid)}>
+        <div className={classNames(classes.layout, classes.contentGrid)}>
           {/* End hero unit */}
           <Grid container spacing={40}>
-            <div>
-              <br/>
-              <h2>Server-Side Rendered Routes:</h2>
+            <Grid item sm={6} md={4} lg={4}>
+              <h3>Server-Side Rendered Pages</h3>
               <ul>
                 <li><Link href='/page?id=first' as='/page/first'><a>My first page</a></Link></li>
                 <li><Link href='/page?id=second' as='/page/second'><a>My second page</a></Link></li>
                 <li><Link href='/page?id=third' as='/page/third'><a>My third page</a></Link></li>
               </ul>
-            </div>
+            </Grid>
+            <Grid item sm={6} md={4} lg={4}>
+              <h3>Next-Skeleton Out of the Box</h3>
+              <ul>
+                <li><a href='https://material-ui.com/' target='_blank' rel='noopener noreferrer'>Material UI</a></li>
+                <li><a href='https://fontawesome.com/icons' target='_blank' rel='noopener noreferrer'>FontAwesome 5</a></li>
+                <li>Mongoose</li>
+                <li>Winston</li>
+              </ul>
+            </Grid>
+            <Grid item sm={6} md={4} lg={4}>
+              <h3>Links and Documentation</h3>
+              <ul>
+                <li><a href='https://nextjs.org/docs#setup' target='_blank' rel='noopener noreferrer'>Next.js Setup</a></li>
+                <li><a href='https://nextjs.org/docs#custom-app' target='_blank' rel='noopener noreferrer'>Using a Custom _App</a></li>
+                <li><a href='https://nextjs.org/docs#custom-document' target='_blank' rel='noopener noreferrer'>Using a Custom _Document</a></li>
+              </ul>
+            </Grid>
           </Grid>
         </div>
       </main>
