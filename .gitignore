@@ -1,3 +1,4 @@
 app.log
 .next/
 node_modules/
+.env

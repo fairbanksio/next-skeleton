@@ -18,7 +18,23 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-jss": "latest",
-    "winston": "^3.1.0"
+    "winston": "^3.1.0",
+    "next-auth": "^1.9.0",
+    "connect-mongo": "^2.0.1",
+    "dotenv": "^6.0.0",
+    "express-session": "^1.15.5",
+    "nodemailer": "^4.6.7",
+    "nodemailer-direct-transport": "^3.3.2",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
+    "passport-twitter": "^1.0.4",
+    "nedb": "^1.8.0",
+    "react-bootstrap-table": "^4.3.1",
+    "react-syntax-highlighter": "^8.0.1",
+    "react-transition-group": "^2.4.0",
+    "reactstrap": "^6.3.0",
+    "universal-cookie": "^2.2.0"
   },
   "license": "ISC"
 }
