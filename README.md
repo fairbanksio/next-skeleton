@@ -13,6 +13,6 @@ It already has some of the basics baked right in:
 
 #### Getting Started
 1. `yarn install` to get dependencies
-2. `yarn dev` to do development work
-3. `yarn build` when ready to ship to production
+2. `yarn dev` to launch the development server
+3. `yarn build` when ready to build for production
 4. `yarn start` to launch the production app
