@@ -104,14 +104,17 @@ function Landing(props) {
           <Grid container spacing={40}>
             <Grid item sm={6} md={4} lg={4}>
               <h3>Server-Side Rendered Pages</h3>
-              <List component="nav" component="a" href="/page/first">
-                <ListItem button>
+              <List component="nav">
+                <ListItem button component="a" href="/page/first">
+                  <i className="fas fa-xs fa-minus"></i>
                   <ListItemText primary="Sample Page 1" />
                 </ListItem>
                 <ListItem button component="a" href="/page/second">
+                  <i className="fas fa-xs fa-minus"></i>
                   <ListItemText primary="Sample Page 2" />
                 </ListItem>
                 <ListItem button component="a" href="/page/third">
+                  <i className="fas fa-xs fa-minus"></i>
                   <ListItemText primary="Sample Page 3" />
                 </ListItem>
               </List>
@@ -120,19 +123,19 @@ function Landing(props) {
               <h3>Included Features</h3>
               <List component="nav">
                 <ListItem button component="a" href="https://material-ui.com/" target='_blank' rel='noopener noreferrer'>
-                  <i class="fab fa-2x fa-uikit"></i>
+                  <i className="fab fa-2x fa-uikit"></i>
                   <ListItemText primary="Material UI" />
                 </ListItem>
                 <ListItem button component="a" href="https://fontawesome.com/icons" target='_blank' rel='noopener noreferrer'>
-                  <i class="fab fa-2x fa-font-awesome-alt"></i>
+                  <i className="fab fa-2x fa-font-awesome-alt"></i>
                   <ListItemText primary="FontAwesome 5" />
                 </ListItem>
                 <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
-                  <i class="fas fa-2x fa-stream"></i>
+                  <i className="fas fa-2x fa-stream"></i>
                   <ListItemText primary="MongoDB Modeling via Mongoose" />
                 </ListItem>
                 <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
-                  <i class="far fa-2x fa-file-code"></i>
+                  <i className="far fa-2x fa-file-code"></i>
                   <ListItemText primary="Winston Logging" />
                 </ListItem>
               </List>
@@ -141,12 +144,15 @@ function Landing(props) {
               <h3>Links and Documentation</h3>
               <List component="nav">
                 <ListItem button component="a" href="https://nextjs.org/docs#setup" target='_blank' rel='noopener noreferrer'>
+                  <i className="fas fa-xs fa-minus"></i>
                   <ListItemText primary="Next.js Setup" />
                 </ListItem>
                 <ListItem button component="a" href="https://nextjs.org/docs#custom-app" target='_blank' rel='noopener noreferrer'>
+                  <i className="fas fa-xs fa-minus"></i>
                   <ListItemText primary="Using a Custom _App" />
                 </ListItem>
                 <ListItem button component="a" href="https://nextjs.org/docs#custom-document" target='_blank' rel='noopener noreferrer'>
+                  <i className="fas fa-xs fa-minus"></i>
                   <ListItemText primary="Using a Custom _Document" />
                 </ListItem>
               </List>
@@ -160,7 +166,7 @@ function Landing(props) {
           Footer
         </Typography>
         <Typography variant="subheading" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          Copyright &copy; Next-Skeleton {(new Date()).getFullYear()}
         </Typography>
       </footer>
       {/* End footer */}
