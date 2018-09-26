@@ -10,6 +10,10 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Cookies from 'universal-cookie'
+import Router from 'next/router'
+import { NextAuth } from 'next-auth/client'
+import Link from 'next/link'
 
 const styles = theme => ({
   layout: {
@@ -43,46 +47,91 @@ const styles = theme => ({
   },
 });
 
-function SignIn(props) {
-  const { classes } = props;
 
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockIcon />
-          </Avatar>
-          <Typography variant="headline">Sign in</Typography>
-          <form className={classes.form}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </FormControl>
-            <Button
-              type="submit"
-              fullWidth
-              variant="raised"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign in
-            </Button>
-          </form>
-        </Paper>
-      </main>
-    </React.Fragment>
-  );
+class SignIn extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: '',
+      session: this.props.session,
+      providers: this.props.providers,
+      submitting: false
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEmailChange = this.handleEmailChange.bind(this)
+
+  }
+
+  handleEmailChange(event) {
+    this.setState({
+      email: event.target.value.trim()
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+
+    if (!this.state.email) return
+
+    this.setState({
+      submitting: true
+    })
+
+    // Save current URL so user is redirected back here after signing in
+    const cookies = new Cookies()
+    cookies.set('redirect_url', window.location.pathname, { path: '/' })
+
+    NextAuth.signin(this.state.email)
+    .then(() => {
+      Router.push(`/auth/check-email?email=${this.state.email}`)
+    })
+    .catch(err => {
+      Router.push(`/auth/error?action=signin&type=email&email=${this.state.email}`)
+    })
+  }
+
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockIcon />
+            </Avatar>
+            <Typography variant="headline">Sign in</Typography>
+            <Link href="/auth/oauth/google"><a>Sign in with google</a></Link>
+            <form className={classes.form} id="signin" method="post" action="/auth/email/signin" onSubmit={this.handleSubmit}>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="email">Email Address</InputLabel>
+                <Input id="email" name="email" autoComplete="email" autoFocus onChange={this.handleEmailChange}/>
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Input
+                  name="password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+              </FormControl>
+              <Button
+                type="submit"
+                fullWidth
+                variant="raised"
+                color="primary"
+                className={classes.submit}
+              >
+                Sign in
+              </Button>
+            </form>
+          </Paper>
+        </main>
+      </React.Fragment>
+    );
+  }
 }
 
 SignIn.propTypes = {
