@@ -21,6 +21,8 @@ import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import { withStyles } from '@material-ui/core/styles';
+import Layout from '../components/appLayout'
+import Page from '../components/page'
 
 const styles = theme => ({
   appBar: {
@@ -62,116 +64,119 @@ const styles = theme => ({
   },
 });
 
-function Landing(props) {
-  const { classes } = props;
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <main>
-        {/* Hero unit */}
-        <div className={classes.heroUnit}>
-          <div className={classes.heroContent}>
-            <Typography variant="display3" align="center" color="textPrimary" gutterBottom>
-              <i style={{ paddingRight: '10px' }} className="fab fa-react"/>
-              Next-Skeleton
-            </Typography>
-            <Typography variant="title" align="center" color="textSecondary" paragraph>
-              A simple framework to help get you started with your Server-side Next.js app.
-            </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={16} justify="center">
-                <Grid item>
-                  <a style={{ textDecoration: 'none' }} href='https://github.com/Fairbanks-io/next-skeleton' target='_blank' rel='noopener noreferrer'>
-                    <Button variant="contained" color="primary">
-                      <i style={{ paddingRight: '10px' }} className="fab fa-github"/>
-                      View on GitHub
-                    </Button>
-                  </a>
+class Landing extends Page {
+
+  render(){
+    const { classes } = this.props;
+    return (
+      <Layout {...this.props}>
+        <CssBaseline />
+        <main>
+          {/* Hero unit */}
+          <div className={classes.heroUnit}>
+            <div className={classes.heroContent}>
+              <Typography variant="display3" align="center" color="textPrimary" gutterBottom>
+                <i style={{ paddingRight: '10px' }} className="fab fa-react"/>
+                Next-Skeleton
+              </Typography>
+              <Typography variant="title" align="center" color="textSecondary" paragraph>
+                A simple framework to help get you started with your Server-side Next.js app.
+              </Typography>
+              <div className={classes.heroButtons}>
+                <Grid container spacing={16} justify="center">
+                  <Grid item>
+                    <a style={{ textDecoration: 'none' }} href='https://github.com/Fairbanks-io/next-skeleton' target='_blank' rel='noopener noreferrer'>
+                      <Button variant="contained" color="primary">
+                        <i style={{ paddingRight: '10px' }} className="fab fa-github"/>
+                        View on GitHub
+                      </Button>
+                    </a>
+                  </Grid>
+                  <Grid item>
+                    <a style={{ textDecoration: 'none' }} href='https://nextjs.org/learn/' target='_blank' rel='noopener noreferrer'>
+                      <Button variant="outlined" color="primary">
+                        Learning Next.js
+                      </Button>
+                    </a>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <a style={{ textDecoration: 'none' }} href='https://nextjs.org/learn/' target='_blank' rel='noopener noreferrer'>
-                    <Button variant="outlined" color="primary">
-                      Learning Next.js
-                    </Button>
-                  </a>
-                </Grid>
-              </Grid>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={classNames(classes.layout, classes.contentGrid)}>
-          {/* End hero unit */}
-          <Grid container spacing={40}>
-            <Grid item sm={6} md={4} lg={4}>
-              <h3>Server-Side Rendered Pages</h3>
-              <List component="nav">
-                <ListItem button component="a" href="/page/first">
-                  <i className="fas fa-xs fa-minus"></i>
-                  <ListItemText primary="Sample Page 1" />
-                </ListItem>
-                <ListItem button component="a" href="/page/second">
-                  <i className="fas fa-xs fa-minus"></i>
-                  <ListItemText primary="Sample Page 2" />
-                </ListItem>
-                <ListItem button component="a" href="/page/third">
-                  <i className="fas fa-xs fa-minus"></i>
-                  <ListItemText primary="Sample Page 3" />
-                </ListItem>
-              </List>
+          <div className={classNames(classes.layout, classes.contentGrid)}>
+            {/* End hero unit */}
+            <Grid container spacing={40}>
+              <Grid item sm={6} md={4} lg={4}>
+                <h3>Server-Side Rendered Pages</h3>
+                <List component="nav">
+                  <ListItem button component="a" href="/page/first">
+                    <i className="fas fa-xs fa-minus"></i>
+                    <ListItemText primary="Sample Page 1" />
+                  </ListItem>
+                  <ListItem button component="a" href="/page/second">
+                    <i className="fas fa-xs fa-minus"></i>
+                    <ListItemText primary="Sample Page 2" />
+                  </ListItem>
+                  <ListItem button component="a" href="/page/third">
+                    <i className="fas fa-xs fa-minus"></i>
+                    <ListItemText primary="Sample Page 3" />
+                  </ListItem>
+                </List>
+              </Grid>
+              <Grid item sm={6} md={4} lg={4}>
+                <h3>Included Features</h3>
+                <List component="nav">
+                  <ListItem button component="a" href="https://material-ui.com/" target='_blank' rel='noopener noreferrer'>
+                    <i className="fab fa-2x fa-uikit"></i>
+                    <ListItemText primary="Material UI" />
+                  </ListItem>
+                  <ListItem button component="a" href="https://fontawesome.com/icons" target='_blank' rel='noopener noreferrer'>
+                    <i className="fab fa-2x fa-font-awesome-alt"></i>
+                    <ListItemText primary="FontAwesome 5" />
+                  </ListItem>
+                  <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
+                    <i className="fas fa-2x fa-stream"></i>
+                    <ListItemText primary="MongoDB Modeling via Mongoose" />
+                  </ListItem>
+                  <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
+                    <i className="far fa-2x fa-file-code"></i>
+                    <ListItemText primary="Winston Logging" />
+                  </ListItem>
+                </List>
+              </Grid>
+              <Grid item sm={6} md={4} lg={4}>
+                <h3>Links and Documentation</h3>
+                <List component="nav">
+                  <ListItem button component="a" href="https://nextjs.org/docs#setup" target='_blank' rel='noopener noreferrer'>
+                    <i className="fas fa-xs fa-minus"></i>
+                    <ListItemText primary="Next.js Setup" />
+                  </ListItem>
+                  <ListItem button component="a" href="https://nextjs.org/docs#custom-app" target='_blank' rel='noopener noreferrer'>
+                    <i className="fas fa-xs fa-minus"></i>
+                    <ListItemText primary="Using a Custom _App" />
+                  </ListItem>
+                  <ListItem button component="a" href="https://nextjs.org/docs#custom-document" target='_blank' rel='noopener noreferrer'>
+                    <i className="fas fa-xs fa-minus"></i>
+                    <ListItemText primary="Using a Custom _Document" />
+                  </ListItem>
+                </List>
+              </Grid>
             </Grid>
-            <Grid item sm={6} md={4} lg={4}>
-              <h3>Included Features</h3>
-              <List component="nav">
-                <ListItem button component="a" href="https://material-ui.com/" target='_blank' rel='noopener noreferrer'>
-                  <i className="fab fa-2x fa-uikit"></i>
-                  <ListItemText primary="Material UI" />
-                </ListItem>
-                <ListItem button component="a" href="https://fontawesome.com/icons" target='_blank' rel='noopener noreferrer'>
-                  <i className="fab fa-2x fa-font-awesome-alt"></i>
-                  <ListItemText primary="FontAwesome 5" />
-                </ListItem>
-                <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
-                  <i className="fas fa-2x fa-stream"></i>
-                  <ListItemText primary="MongoDB Modeling via Mongoose" />
-                </ListItem>
-                <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
-                  <i className="far fa-2x fa-file-code"></i>
-                  <ListItemText primary="Winston Logging" />
-                </ListItem>
-              </List>
-            </Grid>
-            <Grid item sm={6} md={4} lg={4}>
-              <h3>Links and Documentation</h3>
-              <List component="nav">
-                <ListItem button component="a" href="https://nextjs.org/docs#setup" target='_blank' rel='noopener noreferrer'>
-                  <i className="fas fa-xs fa-minus"></i>
-                  <ListItemText primary="Next.js Setup" />
-                </ListItem>
-                <ListItem button component="a" href="https://nextjs.org/docs#custom-app" target='_blank' rel='noopener noreferrer'>
-                  <i className="fas fa-xs fa-minus"></i>
-                  <ListItemText primary="Using a Custom _App" />
-                </ListItem>
-                <ListItem button component="a" href="https://nextjs.org/docs#custom-document" target='_blank' rel='noopener noreferrer'>
-                  <i className="fas fa-xs fa-minus"></i>
-                  <ListItemText primary="Using a Custom _Document" />
-                </ListItem>
-              </List>
-            </Grid>
-          </Grid>
-        </div>
-      </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="title" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subheading" align="center" color="textSecondary" component="p">
-          Copyright &copy; Next-Skeleton {(new Date()).getFullYear()}
-        </Typography>
-      </footer>
-      {/* End footer */}
-    </React.Fragment>
-  );
+          </div>
+        </main>
+        {/* Footer */}
+        <footer className={classes.footer}>
+          <Typography variant="title" align="center" gutterBottom>
+            Footer
+          </Typography>
+          <Typography variant="subheading" align="center" color="textSecondary" component="p">
+            Copyright &copy; Next-Skeleton {(new Date()).getFullYear()}
+          </Typography>
+        </footer>
+        {/* End footer */}
+      </Layout>
+    );
+  }
 }
 
 Landing.propTypes = {
