@@ -65,6 +65,9 @@ const styles = theme => ({
 });
 
 class Landing extends Page {
+  constructor(props) {
+    super(props)
+  }
 
   render(){
     const { classes } = this.props;
