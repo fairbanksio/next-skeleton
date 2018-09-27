@@ -1,20 +1,11 @@
 import React from 'react'
 import App, {Container} from 'next/app'
-import NavBar from '../components/navbar';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
 import getPageContext from '../components/getPageContext';
 
-class Layout extends React.Component {
-  render () {
-    const {children} = this.props
-    return <div className='layout'>
-      <NavBar />
-      {children}
-    </div>
-  }
-}
+
 
 export default class MyApp extends App {
   constructor(props) {
@@ -51,9 +42,9 @@ export default class MyApp extends App {
             <CssBaseline />
             {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server side. */}
-            <Layout>
-              <Component pageContext={this.pageContext} {...pageProps} />
-            </Layout>
+
+            <Component pageContext={this.pageContext} {...pageProps} />
+
           </MuiThemeProvider>
         </JssProvider>
       </Container>

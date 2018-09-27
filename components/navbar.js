@@ -17,6 +17,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Router from 'next/router'
 
 const styles = theme => ({
   root: {
@@ -93,10 +94,26 @@ const styles = theme => ({
 });
 
 class NavBar extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      session: props.session,
+      isSignedIn: (props.session.user) ? true : false,
+      name: '',
+      email: '',
+
+    }
+    if (props.session.user) {
+      this.state.name = props.session.user.name
+      this.state.email = props.session.user.email
+      this.state.isAdmin =  (props.session.user.admin) ? true : false
+    }
+  }
+
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
-    userAuthd: false
   };
 
   handleProfileMenuOpen = event => {
@@ -119,11 +136,22 @@ class NavBar extends React.Component {
   handleSignIn = () => {
     this.setState({ userAuthd: true, anchorEl: null });
     this.handleMobileMenuClose();
+    Router.push('/signin')
   };
 
   handleSignOut = () => {
     this.setState({ userAuthd: false, anchorEl: null });
     this.handleMobileMenuClose();
+  };
+
+  handleGoToAdmin = () => {
+    this.handleMobileMenuClose();
+    Router.push('/admin')
+  };
+
+  handleGoToAccount = () => {
+    this.handleMobileMenuClose();
+    Router.push('/account')
   };
 
   render() {
@@ -140,9 +168,13 @@ class NavBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        {this.state.userAuthd == true
+        {this.state.isSignedIn == true
           ? <div>
-              <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+              {this.state.isAdmin == true
+                ? <MenuItem onClick={this.handleGoToAdmin}>Admin</MenuItem>
+                : null
+              }
+              <MenuItem onClick={this.handleGoToAccount}>Account</MenuItem>
               <MenuItem onClick={this.handleSignOut}>Sign Out</MenuItem>
             </div>
           : null
@@ -176,7 +208,7 @@ class NavBar extends React.Component {
         </MenuItem>
         <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
-            {this.state.userAuthd == true
+            {this.state.isSignedIn == true
               ? <AccountCircle />
               : <Button onClick={this.handleSignIn} style={{ color: '#FFF', borderColor: '#FFF' }} variant="outlined" color="primary" size="small" className={classes.button}>Sign In</Button>
             }
@@ -190,7 +222,7 @@ class NavBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            {this.state.userAuthd == true
+            {this.state.isSignedIn == true
               ? <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
                   <MenuIcon />
                 </IconButton>
@@ -218,7 +250,7 @@ class NavBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              {this.state.userAuthd == true
+              {this.state.isSignedIn == true
                 ? <IconButton
                     aria-owns={isMenuOpen ? 'material-appbar' : null}
                     aria-haspopup="true"

@@ -8,7 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import { NextAuth } from 'next-auth/client'
 import Page from '../components/page'
-import Layout from '../components/layout'
+import Layout from '../components/appLayout'
 import Cookies from 'universal-cookie'
 
 export default class extends Page {
