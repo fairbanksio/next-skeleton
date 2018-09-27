@@ -8,7 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import { NextAuth } from 'next-auth/client'
 import Page from '../components/page'
-import Layout from '../components/layout'
+import Layout from '../components/appLayout'
 import Cookies from 'universal-cookie'
 
 export default class extends Page {
@@ -131,7 +131,7 @@ export default class extends Page {
       const alert = (this.state.alertText === null) ? <div/> : <div className={`alert ${this.state.alertStyle}`} role="alert">{this.state.alertText}</div>
 
       return (
-        <Layout {...this.props} navmenu={false}>
+        <Layout {...this.props}>
           <h1 className="display-2">Your Account</h1>
           <p className="lead text-muted">
             Edit your profile and link accounts

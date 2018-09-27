@@ -5,7 +5,7 @@
 import Link from 'next/link'
 import SyntaxHighlighter from 'react-syntax-highlighter/prism'
 import Page from '../components/page'
-import Layout from '../components/layout'
+
 import Loader from '../components/loader'
 import User from '../models/user'
 import Table from '@material-ui/core/Table';
@@ -14,6 +14,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Layout from '../components/appLayout'
 
 export default class extends Page {
 
@@ -52,12 +53,18 @@ export default class extends Page {
   }
 
   async updateData() {
-    this.setState({
-      data: await User.list({
-          page: this.options.page,
-          size: this.options.sizePerPage
-        })
-    })
+    if (this.props.session.user && this.props.session.user.admin == true){
+      this.setState({
+        data: await User.list({
+            page: this.options.page,
+            size: this.options.sizePerPage
+          })
+      })
+    } else {
+      this.setState({
+        data: null
+      })
+    }
   }
 
   render() {
@@ -68,7 +75,7 @@ export default class extends Page {
     const totalSize = (this.state.data && this.state.data.total) ? this.state.data.total : 0
 
     return (
-      <Layout {...this.props} navmenu={false}>
+      <Layout {...this.props}>
         <h1 className="display-4">Administration</h1>
         <p className="lead text-muted ">
           This is an example read-only admin page which lists user accounts.

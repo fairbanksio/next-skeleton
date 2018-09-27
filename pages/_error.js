@@ -1,18 +1,28 @@
 import React from 'react'
+import Layout from '../components/appLayout'
+import Page from '../components/page'
 
-export default class Error extends React.Component {
-  static getInitialProps({ res, err }) {
+export default class Error extends Page {
+  static async getInitialProps({ req,res, err }) {
     const statusCode = res ? res.statusCode : err ? err.statusCode : null;
-    return { statusCode }
+    let props = await super.getInitialProps({req})
+    props.statusCode = statusCode
+    return props
+  }
+
+  constructor(props) {
+    super(props)
   }
 
   render() {
     return (
-      <p>
-        {this.props.statusCode
-          ? `An error ${this.props.statusCode} occurred on server`
-          : 'An error occurred on client'}
-      </p>
+      <Layout {...this.props}>
+        <p>
+          {this.props.statusCode
+            ? `An error ${this.props.statusCode} occurred on server`
+            : 'An error occurred on client'}
+        </p>
+      </Layout>
     )
   }
 }

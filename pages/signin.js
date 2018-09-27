@@ -14,6 +14,8 @@ import Cookies from 'universal-cookie'
 import Router from 'next/router'
 import { NextAuth } from 'next-auth/client'
 import Link from 'next/link'
+import Layout from '../components/appLayout'
+import Page from '../components/page'
 
 const styles = theme => ({
   layout: {
@@ -48,7 +50,7 @@ const styles = theme => ({
 });
 
 
-class SignIn extends React.Component {
+class SignIn extends Page {
   constructor(props) {
     super(props)
     this.state = {
@@ -59,6 +61,8 @@ class SignIn extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
+
+
 
   }
 
@@ -94,7 +98,7 @@ class SignIn extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <React.Fragment>
+      <Layout {...this.props}>
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
@@ -129,7 +133,7 @@ class SignIn extends React.Component {
             </form>
           </Paper>
         </main>
-      </React.Fragment>
+      </Layout>
     );
   }
 }
