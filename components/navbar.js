@@ -18,6 +18,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Router from 'next/router'
+import { NextAuth } from 'next-auth/client'
 
 const styles = theme => ({
   root: {
@@ -109,6 +110,8 @@ class NavBar extends React.Component {
       this.state.email = props.session.user.email
       this.state.isAdmin =  (props.session.user.admin) ? true : false
     }
+
+
   }
 
   state = {
@@ -139,11 +142,6 @@ class NavBar extends React.Component {
     Router.push('/signin')
   };
 
-  handleSignOut = () => {
-    this.setState({ userAuthd: false, anchorEl: null });
-    this.handleMobileMenuClose();
-  };
-
   handleGoToAdmin = () => {
     this.handleMobileMenuClose();
     Router.push('/admin')
@@ -153,6 +151,50 @@ class NavBar extends React.Component {
     this.handleMobileMenuClose();
     Router.push('/account')
   };
+
+  handleSignOut = async () => {
+    this.setState({ userAuthd: false, anchorEl: null });
+    this.handleMobileMenuClose();
+
+    const formData = {
+      _csrf: await NextAuth.csrfToken(),
+    }
+    console.log(formData)
+    // URL encode form
+    // Note: This uses a x-www-form-urlencoded rather than sending JSON so that
+    // the form also in browsers without JavaScript
+    const encodedForm = Object.keys(formData).map((key) => {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key])
+    }).join('&')
+
+    fetch('/auth/signout', {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: encodedForm
+    })
+    .then(async res => {
+      if (res.status === 200) {
+        // Force update session so that changes to name or email are reflected
+        // immediately in the navbar (as we pass our session to it).
+        this.setState({
+          session: await NextAuth.init({force: true}), // Update session data
+        })
+
+        Router.push('/')
+
+      } else {
+        this.setState({
+          session: await NextAuth.init({force: true}), // Update session data
+          alertText: 'Failed to signout',
+          alertStyle: 'alert-danger',
+        })
+        Router.push('/account')
+      }
+    })
+  }
 
   render() {
     const { anchorEl, mobileMoreAnchorEl, userAuthd } = this.state;
