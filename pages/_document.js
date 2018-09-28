@@ -40,8 +40,8 @@ export default class MyDocument extends Document {
          <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
        </Head>
        <body>
-         <Main />
-         <NextScript />
+        <Main />
+        <NextScript />
        </body>
      </html>
    );
