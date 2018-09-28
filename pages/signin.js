@@ -49,7 +49,6 @@ const styles = theme => ({
   },
 });
 
-
 class SignIn extends Page {
   constructor(props) {
     super(props)
@@ -61,9 +60,6 @@ class SignIn extends Page {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
-
-
-
   }
 
   handleEmailChange(event) {
@@ -73,10 +69,8 @@ class SignIn extends Page {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-
+    event.preventDefault();
     if (!this.state.email) return
-
     this.setState({
       submitting: true
     })
@@ -94,7 +88,6 @@ class SignIn extends Page {
     })
   }
 
-
   render() {
     const { classes } = this.props;
     return (
@@ -106,7 +99,6 @@ class SignIn extends Page {
               <LockIcon />
             </Avatar>
             <Typography variant="headline">Sign in</Typography>
-            <Link href="/auth/oauth/google"><a>Sign in with google</a></Link>
             <form className={classes.form} id="signin" method="post" action="/auth/email/signin" onSubmit={this.handleSubmit}>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -131,6 +123,8 @@ class SignIn extends Page {
                 Sign in
               </Button>
             </form>
+            <br />
+            <Link href="/auth/oauth/google"><a>Sign in with Google</a></Link>
           </Paper>
         </main>
       </Layout>
