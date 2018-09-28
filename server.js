@@ -70,9 +70,11 @@ nextApp
     })
 
     expressApp.get('/login', (req, res) => {
-      // Note: To make capturing a slug easier when rendering both client
-      // and server side, name it ':id'
       return renderAndCache(req, res, '/login', req.params)
+    })
+
+    expressApp.get('/dashboard', (req, res) => {
+      return renderAndCache(req, res, '/dashboard', req.params)
     })
 
     // Default catch-all handler to allow Next.js to handle all other routes
