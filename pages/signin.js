@@ -10,12 +10,13 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Cookies from 'universal-cookie'
-import Router from 'next/router'
-import { NextAuth } from 'next-auth/client'
-import Link from 'next/link'
-import Layout from '../components/appLayout'
-import Page from '../components/page'
+import Cookies from 'universal-cookie';
+import Router from 'next/router';
+import { NextAuth } from 'next-auth/client';
+import Link from 'next/link';
+import Layout from '../components/appLayout';
+import Page from '../components/page';
+import GoogleButton from 'react-google-button';
 
 const styles = theme => ({
   layout: {
@@ -38,7 +39,7 @@ const styles = theme => ({
   },
   avatar: {
     margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: '100%', // Fix IE11 issue.
@@ -120,11 +121,14 @@ class SignIn extends Page {
                 color="primary"
                 className={classes.submit}
               >
-                Sign in
+                Sign In
               </Button>
             </form>
-            <br />
-            <Link href="/auth/oauth/google"><a>Sign in with Google</a></Link>
+            <br/>
+            <GoogleButton
+              type='light' // Must be of type: light | dark
+              onClick={() => { window.location.href = '/auth/oauth/google' }}
+            />
           </Paper>
         </main>
       </Layout>
