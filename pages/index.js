@@ -23,7 +23,6 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import { withStyles } from '@material-ui/core/styles';
 import Layout from '../components/appLayout'
 import Page from '../components/page'
-import { NextAuth } from 'next-auth/client'
 
 const styles = theme => ({
   appBar: {
@@ -66,9 +65,9 @@ const styles = theme => ({
 });
 
 class Landing extends Page {
-  static async getInitialProps({req}) {
+  static async getInitialProps ({ req, query: { id } }) {
     let props = await super.getInitialProps({req})
-    props.linkedAccounts = await NextAuth.linked({req})
+    props.id = id
     return props
   }
 
