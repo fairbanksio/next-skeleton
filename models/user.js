@@ -6,12 +6,9 @@
 import fetch from 'isomorphic-fetch'
 
 export default class {
-  
-  static async list({
-    page = 0,
-    size = 10
-  } = {}) {
-    return fetch(`/admin/users?page=${page}&size=${size}`, {
+
+  static async list() {
+    return fetch(`/admin/users`, {
       credentials: 'same-origin'
     })
     .then(response => {
