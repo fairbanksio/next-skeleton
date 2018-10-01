@@ -16,7 +16,6 @@
     "jss": "latest",
     "lru-cache": "^4.0.2",
     "mongoose": "^5.2.17",
-    "nedb": "^1.8.0",
     "next": "^7.0.0",
     "next-auth": "^1.9.0",
     "nodemailer": "^4.6.7",
@@ -30,7 +29,6 @@
     "react-dom": "^16.5.2",
     "react-google-button": "^0.5.3",
     "react-jss": "latest",
-    "react-syntax-highlighter": "^8.0.1",
     "universal-cookie": "^2.2.0",
     "winston": "^3.1.0"
   },

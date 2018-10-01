@@ -22,7 +22,7 @@
  *
  * Each function returns Promise.resolve() - or Promise.reject() on error.
  *
- * This specific example supports both MongoDB and NeDB, but can be refactored
+ * This specific example supports MongoDB, but can be refactored
  * to work with any database.
  *
  * Environment variables for this example:
@@ -42,10 +42,7 @@
 require('dotenv').load()
 
 // This config file uses MongoDB for User accounts, as well as session storage.
-// This config includes options for NeDB, which it defaults to if no DB URI
-// is specified. NeDB is an in-memory only database intended here for testing.
 const MongoClient = require('mongodb').MongoClient
-const NeDB = require('nedb')
 const MongoObjectId = (process.env.MONGO_URI) ? require('mongodb').ObjectId : (id) => { return id }
 
 // Use Node Mailer for email sign in
@@ -69,23 +66,14 @@ if (process.env.EMAIL_SERVER && process.env.EMAIL_USERNAME && process.env.EMAIL_
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    if (process.env.MONGO_URI) {
-      // Connect to MongoDB Database and return user connection
-      MongoClient.connect(process.env.MONGO_URI, (err, mongoClient) => {
-        if (err) return reject(err)
-        const dbName = process.env.MONGO_URI.split('/').pop().split('?').shift()
-        const db = mongoClient.db(dbName)
-        return resolve(db.collection('users'))
-      })
-    } else {
-      // If no MongoDB URI string specified, use NeDB, an in-memory work-a-like.
-      // NeDB is not persistant and is intended for testing only.
-      let collection = new NeDB({ autoload: true })
-      collection.loadDatabase(err => {
-        if (err) return reject(err)
-        resolve(collection)
-      })
-    }
+
+    MongoClient.connect(process.env.MONGO_URI, (err, mongoClient) => {
+      if (err) return reject(err)
+      const dbName = process.env.MONGO_URI.split('/').pop().split('?').shift()
+      const db = mongoClient.db(dbName)
+      return resolve(db.collection('users'))
+    })
+
   })
   .then(usersCollection => {
     return Promise.resolve({

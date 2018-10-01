@@ -19,6 +19,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Router from 'next/router'
 import { NextAuth } from 'next-auth/client'
+import Link from 'next/link'
 
 const styles = theme => ({
   root: {
@@ -157,8 +158,7 @@ class NavBar extends React.Component {
   };
 
   handleSignOut = async () => {
-    this.setState({ userAuthd: false, anchorEl: null });
-    this.handleMobileMenuClose();
+
 
     const formData = {
       _csrf: await NextAuth.csrfToken(),
@@ -185,6 +185,8 @@ class NavBar extends React.Component {
         // immediately in the navbar (as we pass our session to it).
         this.setState({
           session: await NextAuth.init({force: true}), // Update session data
+          isSignedIn:  false,
+          anchorEl: null
         })
 
         Router.push('/')

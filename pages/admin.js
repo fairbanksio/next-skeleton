@@ -3,7 +3,6 @@
  * page you need to use MongoDB and set '"admin": true' on your account.
  **/
 import Link from 'next/link'
-import SyntaxHighlighter from 'react-syntax-highlighter/prism'
 import Page from '../components/page'
 
 import Loader from '../components/loader'

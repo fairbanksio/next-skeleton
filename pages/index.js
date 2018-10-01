@@ -76,9 +76,9 @@ class Landing extends Page {
   }
 
   render(){
-    const { classes } = this.props;
+    const { classes, ...otherProps} = this.props;
     return (
-      <Layout {...this.props}>
+      <Layout {...otherProps}>
         <CssBaseline />
         <main>
           {/* Hero unit */}
