@@ -16,7 +16,7 @@
  * TWITTER_KEY=
  * TWITTER_SECRET=
  *
- * If you wish, you can put these in a `.env` to seperate your environment 
+ * If you wish, you can put these in a `.env` to seperate your environment
  * specific configuration from your code.
  **/
 
@@ -61,11 +61,13 @@ module.exports = () => {
         clientSecret: process.env.GOOGLE_SECRET
       },
       getProfile(profile) {
-        // Normalize profile into one with {id, name, email} keys
+        // Normalize profile into one with {id, name, email, photo} keys
+        var photo = profile.photos[0].value.substring(0, profile.photos[0].value.length - 6); // Trim the last 5 characters because Google appends '?sz=50'
         return {
           id: profile.id,
           name: profile.displayName,
-          email: profile.emails[0].value
+          email: profile.emails[0].value,
+          photo: photo,
         }
       }
     })
@@ -76,10 +78,10 @@ module.exports = () => {
    * If we don't get one NextAuth will create a placeholder in the form
    * `{provider}-{account-id}@localhost.localdomain`
    *
-   * To have your Twitter oAuth return emails go to apps.twitter.com and add 
-   * links to your Terms and Conditions and Privacy Policy under the "Settings" 
-   * tab, then check the "Request email addresses" from users box under the 
-   * "Permissions" tab. 
+   * To have your Twitter oAuth return emails go to apps.twitter.com and add
+   * links to your Terms and Conditions and Privacy Policy under the "Settings"
+   * tab, then check the "Request email addresses" from users box under the
+   * "Permissions" tab.
    **/
   if (process.env.TWITTER_KEY && process.env.TWITTER_SECRET) {
     providers.push({
@@ -103,6 +105,6 @@ module.exports = () => {
       }
     })
   }
-  
+
   return providers
 }

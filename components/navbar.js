@@ -103,15 +103,14 @@ class NavBar extends React.Component {
       isSignedIn: (props.session.user) ? true : false,
       name: '',
       email: '',
-
+      photo: ''
     }
     if (props.session.user) {
       this.state.name = props.session.user.name
       this.state.email = props.session.user.email
+      this.state.photo = props.session.user.photo
       this.state.isAdmin =  (props.session.user.admin) ? true : false
     }
-
-
   }
 
   state = {
@@ -140,6 +139,11 @@ class NavBar extends React.Component {
     this.setState({ userAuthd: true, anchorEl: null });
     this.handleMobileMenuClose();
     Router.push('/signin')
+  };
+
+  handleGoToDashboard = () => {
+    this.handleMobileMenuClose();
+    Router.push('/dashboard')
   };
 
   handleGoToAdmin = () => {
@@ -212,6 +216,7 @@ class NavBar extends React.Component {
       >
         {this.state.isSignedIn == true
           ? <div>
+              <MenuItem onClick={this.handleGoToDashboard}>Dashboard</MenuItem>
               {this.state.isAdmin == true
                 ? <MenuItem onClick={this.handleGoToAdmin}>Admin</MenuItem>
                 : null
@@ -264,13 +269,6 @@ class NavBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            {this.state.isSignedIn == true
-              ? <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-                  <MenuIcon />
-                </IconButton>
-              : null
-            }
-
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
               <a style={{ textDecoration: 'none', color: 'white' }} href='/'>
                 <i style={{ paddingRight: '10px' }} className="fab fa-react"/>

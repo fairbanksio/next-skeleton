@@ -34,7 +34,7 @@
  * EMAIL_USERNAME=username@gmail.com
  * EMAIL_PASSWORD=p4ssw0rd
  *
- * If you wish, you can put these in a `.env` to seperate your environment 
+ * If you wish, you can put these in a `.env` to seperate your environment
  * specific configuration from your code.
  **/
 
@@ -42,7 +42,7 @@
 require('dotenv').load()
 
 // This config file uses MongoDB for User accounts, as well as session storage.
-// This config includes options for NeDB, which it defaults to if no DB URI 
+// This config includes options for NeDB, which it defaults to if no DB URI
 // is specified. NeDB is an in-memory only database intended here for testing.
 const MongoClient = require('mongodb').MongoClient
 const NeDB = require('nedb')
@@ -66,10 +66,10 @@ if (process.env.EMAIL_SERVER && process.env.EMAIL_USERNAME && process.env.EMAIL_
       }
     })
 }
-        
+
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    if (process.env.MONGO_URI) { 
+    if (process.env.MONGO_URI) {
       // Connect to MongoDB Database and return user connection
       MongoClient.connect(process.env.MONGO_URI, (err, mongoClient) => {
         if (err) return reject(err)
@@ -85,14 +85,14 @@ module.exports = () => {
         if (err) return reject(err)
         resolve(collection)
       })
-    }  
+    }
   })
   .then(usersCollection => {
     return Promise.resolve({
-      // If a user is not found find() should return null (with no error).
+      // If a user is not found, find() should return null (with no error).
       find: ({id, email, emailToken, provider} = {}) => {
         let query = {}
- 
+
         // Find needs to support looking up a user by ID, Email, Email Token,
         // and Provider Name + Users ID for that Provider
         if (id) {
@@ -124,10 +124,10 @@ module.exports = () => {
           usersCollection.insert(user, (err, response) => {
             if (err) return reject(err)
 
-            // Mongo Client automatically adds an id to an inserted object, but 
+            // Mongo Client automatically adds an id to an inserted object, but
             // if using a work-a-like we may need to add it from the response.
             if (!user._id && response._id) user._id = response._id
-  
+
             return resolve(user)
           })
         })
@@ -166,10 +166,10 @@ module.exports = () => {
           // Handle responses from deserialize()
           return Promise.resolve(user.id)
         } else if (user._id) {
-          // Handle responses from find(), insert(), update() 
-          return Promise.resolve(user._id) 
+          // Handle responses from find(), insert(), update()
+          return Promise.resolve(user._id)
         } else {
-          return Promise.reject(new Error("Unable to serialise user"))
+          return Promise.reject(new Error("Unable to serialize user"))
         }
       },
       // Deseralize turns a User ID into a normalized User object that is
@@ -179,16 +179,17 @@ module.exports = () => {
         return new Promise((resolve, reject) => {
           usersCollection.findOne({ _id: MongoObjectId(id) }, (err, user) => {
             if (err) return reject(err)
-              
+
             // If user not found (e.g. account deleted) return null object
             if (!user) return resolve(null)
-              
+
             return resolve({
               id: user._id,
               name: user.name,
               email: user.email,
               emailVerified: user.emailVerified,
-              admin: user.admin || false
+              admin: user.admin || false,
+              photo: user.photo
             })
           })
         })
@@ -203,9 +204,9 @@ module.exports = () => {
         .sendMail({
           to: email,
           from: process.env.EMAIL_FROM,
-          subject: 'Sign in link',
+          subject: 'Sign in to Next-Skeleton',
           text: `Use the link below to sign in:\n\n${url}\n\n`,
-          html: `<p>Use the link below to sign in:</p><p>${url}</p>`
+          html: `<p>Use the link below to sign in to Next-Skeleton:</p><p>${url}</p>`
         }, (err) => {
           if (err) {
             console.error('Error sending email to ' + email, err)
@@ -213,7 +214,7 @@ module.exports = () => {
         })
         if (process.env.NODE_ENV === 'development')  {
           console.log('Generated sign in link ' + url + ' for ' + email)
-        }   
+        }
       },
     })
   })

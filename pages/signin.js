@@ -10,12 +10,13 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Cookies from 'universal-cookie'
-import Router from 'next/router'
-import { NextAuth } from 'next-auth/client'
-import Link from 'next/link'
-import Layout from '../components/appLayout'
-import Page from '../components/page'
+import Cookies from 'universal-cookie';
+import Router from 'next/router';
+import { NextAuth } from 'next-auth/client';
+import Link from 'next/link';
+import Layout from '../components/appLayout';
+import Page from '../components/page';
+import GoogleButton from 'react-google-button';
 
 const styles = theme => ({
   layout: {
@@ -38,7 +39,7 @@ const styles = theme => ({
   },
   avatar: {
     margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: '100%', // Fix IE11 issue.
@@ -48,7 +49,6 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
   },
 });
-
 
 class SignIn extends Page {
   constructor(props) {
@@ -61,9 +61,6 @@ class SignIn extends Page {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
-
-
-
   }
 
   handleEmailChange(event) {
@@ -73,10 +70,8 @@ class SignIn extends Page {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-
+    event.preventDefault();
     if (!this.state.email) return
-
     this.setState({
       submitting: true
     })
@@ -94,7 +89,6 @@ class SignIn extends Page {
     })
   }
 
-
   render() {
     const { classes } = this.props;
     return (
@@ -106,7 +100,6 @@ class SignIn extends Page {
               <LockIcon />
             </Avatar>
             <Typography variant="headline">Sign in</Typography>
-            <Link href="/auth/oauth/google"><a>Sign in with google</a></Link>
             <form className={classes.form} id="signin" method="post" action="/auth/email/signin" onSubmit={this.handleSubmit}>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -128,9 +121,14 @@ class SignIn extends Page {
                 color="primary"
                 className={classes.submit}
               >
-                Sign in
+                Sign In
               </Button>
             </form>
+            <br/>
+            <GoogleButton
+              type='light' // Must be of type: light | dark
+              onClick={() => { window.location.href = '/auth/oauth/google' }}
+            />
           </Paper>
         </main>
       </Layout>
