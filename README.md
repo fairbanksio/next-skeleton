@@ -20,12 +20,12 @@ It already has some of the basics baked right in:
 
 #### Setting up Sign in with Google
 
-Environment variables:
+Environment Variables:
 
 * GOOGLE_ID
 * GOOGLE_SECRET
 
-Configuration steps:
+Configuration Steps:
 
 1. Visit [Google Cloud Console](https://cloud.google.com/console/project)
 2. Click the **CREATE PROJECT** button, enter a *Project Name* and click **CREATE**

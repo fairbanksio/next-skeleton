@@ -15,12 +15,12 @@ export default class extends Page {
     props.session = await NextAuth.init({force: true, req: req})
     props.providers = await NextAuth.providers({req})
 
-    // If signed in already, redirect to account management page.
+    // If signed in already, redirect to the dashboard.
     if (props.session.user) {
       if (req) {
-        res.redirect('/account')
+        res.redirect('/dashboard')
       } else {
-        Router.push('/account')
+        Router.push('/dashboard')
       }
     }
 
@@ -46,9 +46,7 @@ export default class extends Page {
       return (
         <Layout {...this.props} navmenu={false} signinBtn={false}>
           <h1 className="text-center display-4 mt-5">Sign up / Sign in</h1>
-
           <SignIn session={this.props.session} providers={this.props.providers}/>
-
         </Layout>
       )
     }
