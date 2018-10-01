@@ -22,6 +22,8 @@ It already has some of the basics baked right in:
 
 Environment Variables:
 
+* SERVER_URL=https://skeleton.mysite.io
+* EMAIL_FROM=next-skeleton@mysite.io
 * GOOGLE_ID
 * GOOGLE_SECRET
 
@@ -37,3 +39,10 @@ Configuration Steps:
 5. Specify *Client ID* as the **GOOGLE_ID** Config Variable
 6. Specify *Client Secret* as the **GOOGLE_SECRET** Config Variable
 7. Enable Google+ on the project - if you don't, sign in with Google+ will fail!
+ 
+#### Available Environment Variable Options
+* PORT=3001
+* SESSION_SECRET=change-me
+* MONGO_URI=mongodb://user:password@localhost:27018/skeleton
+* SERVER_URL=https://skeleton.mysite.io
+* EMAIL_FROM=next-skeleton@mysite.io
