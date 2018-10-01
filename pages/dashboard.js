@@ -113,7 +113,10 @@ class Dashboard extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              Mini variant drawer
+              <a style={{ textDecoration: 'none', color: 'white' }} href='/dashboard'>
+                <i style={{ paddingRight: '10px' }} className="fab fa-react"/>
+                Next-Skeleton
+              </a>
             </Typography>
           </Toolbar>
         </AppBar>
