@@ -188,7 +188,8 @@ module.exports = () => {
               name: user.name,
               email: user.email,
               emailVerified: user.emailVerified,
-              admin: user.admin || false
+              admin: user.admin || false,
+              photo: user.photo
             })
           })
         })
