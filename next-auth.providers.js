@@ -63,7 +63,6 @@ module.exports = () => {
       getProfile(profile) {
         // Normalize profile into one with {id, name, email, photo} keys
         var photo = profile.photos[0].value.substring(0, profile.photos[0].value.length - 6); // Trim the last 5 characters because Google appends '?sz=50'
-        console.log(photo);
         return {
           id: profile.id,
           name: profile.displayName,
