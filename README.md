@@ -10,6 +10,7 @@ It already has some of the basics baked right in:
 - FontAwesome 5
 - Mongoose DB Modeling
 - Winston Logging
+- OAuth via [next-auth](https://github.com/iaincollins/next-auth)
 
 #### Getting Started
 1. `yarn install` to get dependencies
