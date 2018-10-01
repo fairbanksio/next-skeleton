@@ -22,8 +22,6 @@ It already has some of the basics baked right in:
 
 Environment Variables:
 
-* SERVER_URL=https://skeleton.mysite.io
-* EMAIL_FROM=next-skeleton@mysite.io
 * GOOGLE_ID
 * GOOGLE_SECRET
 
