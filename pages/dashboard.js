@@ -139,7 +139,7 @@ class Dashboard extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+          <Typography noWrap>{'This page is currently under construction. Please stay tuned...'}</Typography>
         </main>
       </div>
     );
