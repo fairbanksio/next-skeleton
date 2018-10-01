@@ -26,6 +26,7 @@ export default class extends Page {
       isSignedIn: (props.session.user) ? true : false,
       name: '',
       email: '',
+      photo: '',
       emailVerified: false,
       alertText: null,
       alertStyle: null
@@ -33,6 +34,7 @@ export default class extends Page {
     if (props.session.user) {
       this.state.name = props.session.user.name
       this.state.email = props.session.user.email
+      this.state.photo = props.session.user.photo
     }
     this.handleChange = this.handleChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -59,11 +61,12 @@ export default class extends Page {
     })
     .then(r => r.json())
     .then(user => {
-      if (!user.name || !user.email) return
+      if (!user.name || !user.email || !user.photo) return
       this.setState({
         name: user.name,
         email: user.email,
-        emailVerified: user.emailVerified
+        emailVerified: user.emailVerified,
+        photo: user.photo,
       })
     })
   }
@@ -132,48 +135,45 @@ export default class extends Page {
 
       return (
         <Layout {...this.props}>
-          <h1 className="display-2">Your Account</h1>
-          <p className="lead text-muted">
-            Edit your profile and link accounts
-          </p>
-
-          {alert}
-          <form method="post" action="/account/user" onSubmit={this.onSubmit}>
-            <Input name="_csrf" type="hidden" value={this.state.session.csrfToken} onChange={()=>{}}/>
-            <FormControl>
-              <InputLabel>Name:</InputLabel>
-
-                <Input name="name" value={this.state.name} onChange={this.handleChange}/>
-
-            </FormControl>
-            <FormControl>
-              <InputLabel>Email:</InputLabel>
-
-                <Input name="email" value={(this.state.email.match(/.*@localhost\.localdomain$/)) ? '' : this.state.email} onChange={this.handleChange}/>
-
-            </FormControl>
-            <FormControl>
-              <p className="text-right">
-                <Button color="primary" type="submit">Save Changes</Button>
-              </p>
-            </FormControl>
-          </form>
-
-          <LinkAccounts
-            session={this.props.session}
-            linkedAccounts={this.props.linkedAccounts}
+          <div style={{ paddingLeft: '25px' }}>
+            <h1 className="display-2">My Account</h1>
+            <p className="lead text-muted">
+              Edit your profile and link accounts
+            </p>
+            {alert}
+            <img alt='profilePhoto' src={this.state.photo} />
+            <form method="post" action="/account/user" onSubmit={this.onSubmit}>
+              <Input name="_csrf" type="hidden" value={this.state.session.csrfToken} onChange={()=>{}}/>
+              <FormControl>
+                <InputLabel>Name:</InputLabel>
+                  <Input name="name" value={this.state.name} onChange={this.handleChange}/>
+              </FormControl>
+              <br />
+              <FormControl>
+                <InputLabel>Email:</InputLabel>
+                  <Input name="email" value={(this.state.email.match(/.*@localhost\.localdomain$/)) ? '' : this.state.email} onChange={this.handleChange}/>
+              </FormControl>
+              <br />
+              <FormControl>
+                <p className="text-right">
+                  <Button color="primary" variant="contained" type="submit">Save Changes</Button>
+                </p>
+              </FormControl>
+            </form>
+            <LinkAccounts
+              session={this.props.session}
+              linkedAccounts={this.props.linkedAccounts}
             />
-
-            <h2>Delete your account</h2>
+            <h2>Delete my account</h2>
             <p>
               If you delete your account it will be erased immediately.
               You can sign up again at any time.
             </p>
             <form id="signout" method="post" action="/account/delete">
               <Input name="_csrf" type="hidden" value={this.state.session.csrfToken}/>
-              <Button type="submit"><span className="icon ion-md-trash mr-1"></span> Delete Account</Button>
+              <Button variant="contained" type="submit"><span className="icon ion-md-trash mr-1"></span> Delete Account</Button>
             </form>
-
+          </div>
         </Layout>
       )
     } else {
