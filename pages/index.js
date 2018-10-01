@@ -144,6 +144,10 @@ class Landing extends Page {
                     <i className="fab fa-2x fa-font-awesome-alt"></i>
                     <ListItemText primary="FontAwesome 5" />
                   </ListItem>
+                  <ListItem button component="a" href="https://github.com/iaincollins/next-auth" target='_blank' rel='noopener noreferrer'>
+                    <i className="fas fa-2x fa-user-lock"></i>
+                    <ListItemText primary="OAuth Integrated" />
+                  </ListItem>
                   <ListItem button component="a" href="https://mongoosejs.com/" target='_blank' rel='noopener noreferrer'>
                     <i className="fas fa-2x fa-stream"></i>
                     <ListItemText primary="MongoDB Modeling via Mongoose" />
