@@ -92,13 +92,11 @@ export default class extends Page {
             <TableBody>
               {data.map(row => {
                 return (
-                  <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell numeric>{row.name}</TableCell>
-                    <TableCell numeric>{row.email}</TableCell>
-                    <TableCell numeric>{row.admin}</TableCell>
+                  <TableRow key={row._id}>
+                    <TableCell>{row._id}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.email}</TableCell>
+                    <TableCell>{row.admin ? "True" : "False"}</TableCell>
                   </TableRow>
                 );
               })}
