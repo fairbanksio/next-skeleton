@@ -141,33 +141,38 @@ export default class extends Page {
               Edit your profile and link accounts
             </p>
             {alert}
-            <img alt='profilePhoto' src={this.state.photo} />
+            <img alt='profilePhoto' src={this.state.photo + '?sz=150'} />
+            <br /><br />
             <form method="post" action="/account/user" onSubmit={this.onSubmit}>
               <Input name="_csrf" type="hidden" value={this.state.session.csrfToken} onChange={()=>{}}/>
-              <FormControl>
+              <FormControl style={{ paddingTop: '2px' }} >
                 <InputLabel>Name:</InputLabel>
                   <Input name="name" value={this.state.name} onChange={this.handleChange}/>
               </FormControl>
-              <br />
-              <FormControl>
+              <br /><br />
+              <FormControl style={{ paddingTop: '2px' }} >
                 <InputLabel>Email:</InputLabel>
                   <Input name="email" value={(this.state.email.match(/.*@localhost\.localdomain$/)) ? '' : this.state.email} onChange={this.handleChange}/>
               </FormControl>
-              <br />
+              <br /><br />
               <FormControl>
-                <p className="text-right">
-                  <Button color="primary" variant="contained" type="submit">Save Changes</Button>
-                </p>
+                <Button color="primary" variant="contained" type="submit">Save Changes</Button>
               </FormControl>
             </form>
+
+            <h2>Manage Identities</h2>
+            <p>
+              Link or Unlink your account with various 3rd party providers like Google or Facebook
+            </p>
             <LinkAccounts
               session={this.props.session}
               linkedAccounts={this.props.linkedAccounts}
             />
+            <br />
+
             <h2>Delete my account</h2>
             <p>
-              If you delete your account it will be erased immediately.
-              You can sign up again at any time.
+              Your account will be deleted immediately but you can sign up again at any time.
             </p>
             <form id="signout" method="post" action="/account/delete">
               <Input name="_csrf" type="hidden" value={this.state.session.csrfToken}/>
@@ -208,11 +213,9 @@ export class LinkAccount extends React.Component {
       return (
         <form method="post" action={`/auth/oauth/${this.props.provider.toLowerCase()}/unlink`}>
           <Input name="_csrf" type="hidden" value={this.props.session.csrfToken}/>
-          <p>
-            <button type="submit">
-              Unlink from {this.props.provider}
-            </button>
-          </p>
+          <Button variant="contained" type="submit">
+            Unlink from {this.props.provider}
+          </Button>
         </form>
       )
     } else {
