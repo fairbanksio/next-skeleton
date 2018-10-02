@@ -19,6 +19,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import User from '../models/user'
 
 let counter = 0;
 function createData(name, calories, fat, carbs, protein) {
@@ -222,7 +223,7 @@ class EnhancedTable extends Page {
         createData('Nougat', 360, 19.0, 9, 37.0),
         createData('Oreo', 437, 18.0, 63, 4.0),
       ],
-      data2: null,
+      data2: this.props.data,
       page: 0,
       rowsPerPage: 5,
     };
@@ -291,12 +292,12 @@ class EnhancedTable extends Page {
   }
 
   async componentDidMount() {
-    await this.updateData()
+    console.log(JSON.stringify(this.state.data2, null, ' '));
   }
 
   render() {
     const { classes } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
+    const { data, order, orderBy, selected, rowsPerPage, page, data2 } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     return (

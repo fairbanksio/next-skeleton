@@ -87,7 +87,7 @@ export default class extends Page {
                 })}
               </TableBody>
             </Table>
-            <UserTable {...this.props}/>
+            <UserTable data={this.state.data} />
           </Paper>
         </div>
       </Layout>
