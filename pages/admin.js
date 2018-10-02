@@ -13,13 +13,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Layout from '../components/appLayout'
+import Layout from '../components/appLayout';
+import UserTable from '../components/userTable';
 
 export default class extends Page {
-
   constructor(props) {
     super(props)
-
     this.state = {
       data: null
     }
@@ -60,35 +59,37 @@ export default class extends Page {
 
     return (
       <Layout {...this.props}>
-        <h1 className="display-4">Administration</h1>
-        <p className="lead text-muted ">
-          This is an example read-only admin page which lists user accounts.
-        </p>
-        <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Id</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Is Admin</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map(row => {
-                return (
-                  <TableRow key={row._id}>
-                    <TableCell>{row._id}</TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.email}</TableCell>
-                    <TableCell>{row.admin ? "True" : "False"}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Paper>
-
+        <div style={{ paddingLeft: '25px', paddingRight: '25px' }}>
+          <h1 className="display-4">Administration</h1>
+          <p className="lead text-muted ">
+            This is an example read-only admin page which lists user accounts.
+          </p>
+          <Paper>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Id</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Is Admin</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.map(row => {
+                  return (
+                    <TableRow key={row._id}>
+                      <TableCell>{row._id}</TableCell>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.email}</TableCell>
+                      <TableCell>{row.admin ? <i className='fas fa-check'/> : null}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+            <UserTable {...this.props}/>
+          </Paper>
+        </div>
       </Layout>
     )
   }
