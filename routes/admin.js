@@ -12,15 +12,8 @@ mongoose.connect(process.env.MONGO_URI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 mongoose.Promise = global.Promise;
-db.once('open', function() {
-  // we're connected!
-});
 
-var UserSchema = new mongoose.Schema({
-  name: String
-});
-
-var User = mongoose.model('User', UserSchema);
+let User = require('../models/usermodel')
 
 module.exports = (expressApp) => {
 
@@ -35,9 +28,6 @@ module.exports = (expressApp) => {
 
     User.find(function (err, users) {
       if (err) return console.error(err);
-      return users
-    })
-    .then(users => {
       return res.json(users)
     })
     .catch(err => {
