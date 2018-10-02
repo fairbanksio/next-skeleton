@@ -4,5 +4,6 @@ var UserSchema = new mongoose.Schema({
   email: String,
   google: Object,
   photo: String,
+  admin: Boolean,
 });
 module.exports = mongoose.model('User', UserSchema)
