@@ -3419,9 +3419,9 @@ neo-async@^2.5.0:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.2.tgz#489105ce7bc54e709d736b195f82135048c50fcc"
 
-next-auth@^1.9.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-1.11.0.tgz#9e18343b9bee583021b99993a37659e6d764e642"
+next-auth@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-1.12.1.tgz#60fdc20be21d77d47be874e88249a6e9d40c98be"
   dependencies:
     babel-core "^6.26.3"
     babel-polyfill "^6.26.0"
