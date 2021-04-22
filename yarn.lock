@@ -4672,18 +4672,18 @@ passport-google-oauth1@1.x.x:
   dependencies:
     passport-oauth1 "1.x.x"
 
-passport-google-oauth20@1.x.x:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/passport-google-oauth20/-/passport-google-oauth20-1.0.0.tgz#3b960e8a1d70d1dbe794615c827c68c40392a5d0"
+passport-google-oauth20@2.x.x:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/passport-google-oauth20/-/passport-google-oauth20-2.0.0.tgz#0d241b2d21ebd3dc7f2b60669ec4d587e3a674ef"
   dependencies:
     passport-oauth2 "1.x.x"
 
-passport-google-oauth@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/passport-google-oauth/-/passport-google-oauth-1.0.0.tgz#65f50633192ad0627a18b08960077109d84eb76d"
+passport-google-oauth@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/passport-google-oauth/-/passport-google-oauth-2.0.0.tgz#f6eb4bc96dd6c16ec0ecfdf4e05ec48ca54d4dae"
   dependencies:
     passport-google-oauth1 "1.x.x"
-    passport-google-oauth20 "1.x.x"
+    passport-google-oauth20 "2.x.x"
 
 passport-oauth1@1.x.x:
   version "1.1.0"
