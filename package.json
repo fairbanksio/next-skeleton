@@ -17,7 +17,7 @@
     "lru-cache": "^4.0.2",
     "mongoose": "^5.7.5",
     "next": "^9.3.2",
-    "next-auth": "^1.12.1",
+    "next-auth": "^3.3.0",
     "nodemailer": "^4.6.7",
     "nodemailer-direct-transport": "^3.3.2",
     "nodemailer-smtp-transport": "^2.7.4",
