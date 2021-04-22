@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "express-session": "^1.15.5",
     "jss": "latest",
-    "lru-cache": "^4.0.2",
+    "lru-cache": "^6.0.0",
     "mongoose": "^5.7.5",
     "next": "^9.3.2",
     "next-auth": "^1.12.1",
