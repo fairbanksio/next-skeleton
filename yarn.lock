@@ -189,6 +189,10 @@
   dependencies:
     "@types/node" "*"
 
+"@types/cookie@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.3.3.tgz#85bc74ba782fb7aa3a514d11767832b0e3bc6803"
+
 "@types/jss@^9.5.6":
   version "9.5.8"
   resolved "https://registry.yarnpkg.com/@types/jss/-/jss-9.5.8.tgz#258391f42211c042fc965508d505cbdc579baa5b"
@@ -712,9 +716,9 @@ cookie@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
 
-cookie@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
+cookie@^0.4.0:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.1.tgz#afd713fe26ebd21ba95ceb61f9a8116e50a537d1"
 
 core-js@^1.0.0:
   version "1.2.7"
@@ -3093,12 +3097,12 @@ underscore@~1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
 
-universal-cookie@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-2.2.0.tgz#328dc3883cf0ebd5b4904902033ad4dfdb907ed2"
+universal-cookie@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-4.0.4.tgz#06e8b3625bf9af049569ef97109b4bb226ad798d"
   dependencies:
-    cookie "^0.3.1"
-    object-assign "^4.1.0"
+    "@types/cookie" "^0.3.3"
+    cookie "^0.4.0"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
