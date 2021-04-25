@@ -1986,9 +1986,9 @@ negotiator@0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
 
-next-auth@^3.17.0:
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.17.0.tgz#014f4ffefc3ec370d2d6e7cf89dda899d7a24f6a"
+next-auth@^3.17.2:
+  version "3.17.2"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.17.2.tgz#69b9cbde1403937600f3c528ab1c79ba76db39e9"
   dependencies:
     crypto-js "^4.0.0"
     futoin-hkdf "^1.3.2"
