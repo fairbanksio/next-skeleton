@@ -1921,9 +1921,9 @@ mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
 
-mongoose@^5.12.5:
-  version "5.12.5"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.12.5.tgz#70d11d3e68a3aeeb6960262633e1ba80cb620385"
+mongoose@^5.12.7:
+  version "5.12.7"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.12.7.tgz#9cbf42246c53b7ab79342c04ef72938d4047b071"
   dependencies:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
@@ -1935,7 +1935,7 @@ mongoose@^5.12.5:
     ms "2.1.2"
     regexp-clone "1.0.0"
     safe-buffer "5.2.1"
-    sift "7.0.1"
+    sift "13.5.2"
     sliced "1.0.1"
 
 mpath@0.8.3:
@@ -2757,9 +2757,9 @@ shell-quote@1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
 
-sift@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/sift/-/sift-7.0.1.tgz#47d62c50b159d316f1372f8b53f9c10cd21a4b08"
+sift@13.5.2:
+  version "13.5.2"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-13.5.2.tgz#24a715e13c617b086166cd04917d204a591c9da6"
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
